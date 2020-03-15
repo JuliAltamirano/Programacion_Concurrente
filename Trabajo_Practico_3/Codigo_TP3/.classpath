@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.9.jar"/>
-	<classpathentry kind="lib" path="lib/org.apache.poi_3.9.0.v201405241750-4.8.0.jar"/>
-	<classpathentry kind="lib" path="lib/poi-3.13.jar"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>
