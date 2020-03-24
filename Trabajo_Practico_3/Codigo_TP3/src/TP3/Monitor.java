@@ -19,26 +19,26 @@ public class Monitor {
 			try{
 				lock.lock();
 				//Si la transicion no puede dispararse el hilo esperar en una cola de condicion.
-				while(!rdp.habilitada(transicion)){
+				while(!rdp.habilitada(transicion))
+					bloqueado.await();
 
-				//		if(lock.getWaitQueueLength(waitStack)==4){
-				//			waitStack.signalAll();
-				//		}
-						bloqueado.await();
-
+				if ((transicion == 2 || transicion == 7 || transicion == 8) && !rdp.habilitadaTemporal(transicion)) {
+					
+					rdp.setHabilitadaTemporal(transicion, false);
 				}
+				else {
+					if (transicion == 2 || transicion == 7 || transicion == 8)						
+						rdp.setHabilitadaTemporal(transicion, true);
 
-				rdp.disparo(transicion);
-				//El salir del monitor implica liberar el lock de exclusion mutua y despertar los hilos que esperaban.
-				//Solo dos continuaran despiertos (Uno para cada Buffer) y el resto volvera a dormir (await())
-				bloqueado.signalAll(); //comprobar
-
-
+					rdp.disparo(transicion);
+					//El salir del monitor implica liberar el lock de exclusion mutua y despertar los hilos que esperaban.
+					//Solo dos continuaran despiertos (Uno para cada Buffer) y el resto volvera a dormir (await())
+					bloqueado.signalAll(); //comprobar					
+				}
 			} finally {
 				//Al cumplirse la condicion de disparo se dispara la transicion y se vuelve a la secuencia de codigo
 				//mientras se sigue estando dentro del monitor (lock.lock).
 				lock.unlock();
-
 			}
 		}
 }

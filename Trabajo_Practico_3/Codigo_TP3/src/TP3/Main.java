@@ -10,11 +10,11 @@ public class Main {
 
 	private static int NUM_DATOS = 1000;
 	private static int ARR_RATE = 20;
-	private static int SV_RATE1 = 0;
-	private static int SV_RATE2 = 0;
+	private static int SV_RATE1 = 20;
+	private static int SV_RATE2 = 20;
 	private static int LOG_DELAY = 100;
 	
-	private static String ROOT = "C:/Disco local/Carpetas/Facu/Facultad/4to Año - 2019/1° semestre/Programación Concurrente/Trabajos Prácticos/TP3_Aichino_Altamirano_Argayo_Bosack/Codigo_TP3";
+	private static String ROOT = "C:/Users/altam/Documents/Universidad/4º año/Primer Semestre/Programación Concurrente/Trabajos Prácticos/Programacion_Concurrente-master/Trabajo_Practico_3/Codigo_TP3";
 	private static String MARK_DIR = "/marcado.xls";
 	private static String W_DIR = "/matrizW.xls";
 	private static String B_DIR ="/matrizB.xls";
@@ -48,7 +48,7 @@ public class Main {
 				imp_datos.creaMatriz(B_DIR, ROOT, NUM_TRANS, NUM_PLAZAS),
 				imp_datos.creaMatriz(W_DIR, ROOT, NUM_TRANS, NUM_PLAZAS),
 				imp_datos.creaMatriz(INVP_DIR, ROOT, INVP_ELEM, INVP_NUM),
-				NUM_TRANS , NUM_PLAZAS );
+				NUM_TRANS, NUM_PLAZAS, ARR_RATE, SV_RATE1, SV_RATE2 );
 
 
 		Buffer buffer[]= new Buffer[2];
@@ -74,7 +74,7 @@ public class Main {
 
 		Politica politica = new Politica(buffer);
 		
-		GeneradorDeDatos generador= new GeneradorDeDatos(monitor, NUM_DATOS, ARR_RATE); //hilo generador de datos
+		GeneradorDeDatos generador= new GeneradorDeDatos(monitor, NUM_DATOS, ARR_RATE, rdp); //hilo generador de datos
 		
 		ArrivalDato arr_dato[]= new ArrivalDato[2];
 		arr_dato[0]= new ArrivalDato(politica, monitor, buffer[0], rdp); //hilo de arrivo de datos a buffer1
