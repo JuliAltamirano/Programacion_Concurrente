@@ -24,9 +24,9 @@ public class Log extends Thread{
     private int delay;
     private ControlOn[] control_on;
     
-    private String LOG_DIR = "C:/Disco local/Carpetas/Facu/Facultad/4to Año - 2019/1° semestre/Programación Concurrente/Trabajos Prácticos/TP3_Aichino_Altamirano_Argayo_Bosack/Codigo_TP3" + "/log.txt";
-	private String TINV_DIR = "C:/Disco local/Carpetas/Facu/Facultad/4to Año - 2019/1° semestre/Programación Concurrente/Trabajos Prácticos/TP3_Aichino_Altamirano_Argayo_Bosack/Codigo_TP3" + "/log_tinv.txt";
-	private String TINV_REGEX_DIR = "C:/Disco local/Carpetas/Facu/Facultad/4to Año - 2019/1° semestre/Programación Concurrente/Trabajos Prácticos/TP3_Aichino_Altamirano_Argayo_Bosack/Codigo_TP3" + "/log_tinv_regex.txt";
+    private String LOG_DIR = "C:/Users/altam/Documents/Universidad/4º año/Primer Semestre/Programación Concurrente/Trabajos Prácticos/Programacion_Concurrente-master/Trabajo_Practico_3/Codigo_TP3" + "/log.txt";
+	private String TINV_DIR = "C:/Users/altam/Documents/Universidad/4º año/Primer Semestre/Programación Concurrente/Trabajos Prácticos/Programacion_Concurrente-master/Trabajo_Practico_3/Codigo_TP3" + "/log_tinv.txt";
+	private String TINV_REGEX_DIR = "C:/Users/altam/Documents/Universidad/4º año/Primer Semestre/Programación Concurrente/Trabajos Prácticos/Programacion_Concurrente-master/Trabajo_Practico_3/Codigo_TP3" + "/log_tinv_regex.txt";
 	
 	public Log(int delay, ControlOn control_on[], Buffer buffer[], RedDePetri rdp, InvTLog inv_t_log){
     	this.delay 		= delay;

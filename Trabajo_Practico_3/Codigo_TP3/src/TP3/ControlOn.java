@@ -35,19 +35,20 @@ public class ControlOn extends Thread {
 					disparar(13);
 					inv_t_log.logInvT(13, "on", 1,"");
 					setEstadoActivo("ACTIVE");
-					
-					hilos_procesador_tiempo[0] = System.currentTimeMillis();
-					long tiempo = hilos_procesador_tiempo[0] - rdp.getTiempoDeHabilitacion(7);
-					if ( tiempo < svRate) {
-						
+										
+					disparar(7);
+					if (!getHabilitadaTemporal(7)) {
+							
+						hilos_procesador_tiempo[0] = System.currentTimeMillis();
+						long tiempo = hilos_procesador_tiempo[0] - getTiempoDeHabilitacion(7);
 						int i = 0;
 						if (hilos_procesador_tiempo[0] > hilos_procesador_tiempo[1] && hilos_procesador_tiempo[1] != 0)
 							i = 1;
 						Thread.sleep((svRate - tiempo) + i);
 						hilos_procesador_tiempo[0] = 0;
+						disparar(7);
 					}
 					buffer.consumir();
-					disparar(7);
 					inv_t_log.logInvT(7, "on", 1,"");
 					setEstadoActivo("IDLE");
 
@@ -67,18 +68,19 @@ public class ControlOn extends Thread {
 					inv_t_log.logInvT(14, "on", 2,"");
 					setEstadoActivo("ACTIVE");
 
-					hilos_procesador_tiempo[0] = System.currentTimeMillis();
-					long tiempo = hilos_procesador_tiempo[0] - rdp.getTiempoDeHabilitacion(8);
-					if ( tiempo < svRate) {
+					disparar(8);
+					if (!getHabilitadaTemporal(8)) {
 						
+						hilos_procesador_tiempo[0] = System.currentTimeMillis();
+						long tiempo = hilos_procesador_tiempo[0] - getTiempoDeHabilitacion(8);
 						int i = 0;
 						if (hilos_procesador_tiempo[0] > hilos_procesador_tiempo[1] && hilos_procesador_tiempo[1] != 0)
 							i = 1;
 						Thread.sleep((svRate - tiempo) + i);
 						hilos_procesador_tiempo[0] = 0;
+						disparar (8);
 					}
 					buffer.consumir();
-					disparar(8);
 					inv_t_log.logInvT(8, "on", 2,"");
 					setEstadoActivo("IDLE");
 					
@@ -118,9 +120,12 @@ public class ControlOn extends Thread {
 	public long getTiempoDeHabilitacion(int transicion) {
 		return rdp.getTiempoDeHabilitacion(transicion);
 	}
+	
+	public boolean getHabilitadaTemporal (int transicion) {
+		return rdp.getHabilitadaTemporal(transicion);
+	}
 
 	public void disparar(int transicion) throws InterruptedException {
-
 		mon.disparo(transicion);
 	}
 }
