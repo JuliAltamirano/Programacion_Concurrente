@@ -6,31 +6,28 @@ public class RedDePetri {
     private int[][] matriz_b;
     private int[][] matriz_w;
     private int[][] matriz_inv_p;
-    int cant_p, cant_t, arrRate, svRate1, svRate2;
+    int cant_p, cant_t; 
     private boolean[]	habilitadas;
-    private boolean[]	habilitadas_temporales;
+    //private boolean[]	habilitadas_temporales;
     private long[] 		tiempo_t_habilitadas;
     private boolean[] 	prueba_inv_p;
     private boolean		fallo_inv_p;
     private int 		cant_fallo_inv_p;
     private String 		log_inv_t;
 
-    RedDePetri(int[] marca, int[][] matriz_b, int[][] matriz_w, int[][] matriz_inv_p, int cant_t, int cant_p, int arrRate, int svRate1, int svRate2 ){
+    RedDePetri(int[] marca, int[][] matriz_b, int[][] matriz_w, int[][] matriz_inv_p, int cant_t, int cant_p ){
         this.marca 				= marca;
         this.matriz_b			= matriz_b;
         this.matriz_w			= matriz_w;
         this.matriz_inv_p 		= matriz_inv_p;
         this.cant_p 			= cant_p;
         this.cant_t 			= cant_t;
-        this.arrRate			= arrRate;
-        this.svRate1			= svRate1;
-        this.svRate2			= svRate2;
         
         habilitadas 				= new boolean[cant_t];
-        habilitadas_temporales		= new boolean[3];
+   /*     habilitadas_temporales		= new boolean[3]; // 1 para cada transicion (2,7 y 8)
         habilitadas_temporales[0]	= false;
         habilitadas_temporales[1]	= false;
-        habilitadas_temporales[2]	= false;
+        habilitadas_temporales[2]	= false; */
         tiempo_t_habilitadas 		= new long[3];
         
         prueba_inv_p			= new boolean[matriz_inv_p.length];
@@ -64,35 +61,10 @@ public class RedDePetri {
             }
         }
     }
-    
-    public boolean habilitada(int transicion){
+    // Devuelve true si ya paso el tiempo de habilitacion de la transicion
+    public boolean habilitada(int transicion){	
 
         return habilitadas[transicion];
-    }
-    
-    public void setHabilitadaTemporal( int transicion, boolean habilitar ) {
-    	
-    	if (transicion == 2)
-    		habilitadas_temporales[0] = habilitar;
-    	else if (transicion == 7 || transicion == 8) 
-    		habilitadas_temporales[transicion-6] = habilitar;
-    }
-    
-    public boolean getHabilitadaTemporal( int transicion ) {
-    	
-    	if (transicion == 2)
-    		return habilitadas_temporales[0];
-    	return habilitadas_temporales[transicion-6];
-    }
-    
-    public boolean habilitadaTemporal(int transicion){
-
-    	long tiempo_actual = System.currentTimeMillis();
-		long tiempo = tiempo_actual - getTiempoDeHabilitacion(transicion);
-		if ((transicion == 2 && tiempo < arrRate) || (transicion == 7 && tiempo < svRate1) || (transicion == 8 && tiempo < svRate2)) {
-			return false;
-		}
-		return true;		
     }
 
     //El disparo de una transicion corresponde a la modificacion del marcado actual
@@ -106,9 +78,9 @@ public class RedDePetri {
         pruebaInvP();
         InvTLog(transicion);
 
-        setTiempoDeHabilitacion(transicion);        
+        setTiempoDeHabilitacion(transicion);	// Se lo hace para guardar el tiempo actual de las transiciones      
     }
-    
+
     private void setTiempoDeHabilitacion (int transicion) { //posicion del tiempo almacenado en el array (0, 1 y 2), correspondiente a las transiciones 2,7 u 8 respectivamente
     	
     	if (transicion == 0 || transicion == 1)
@@ -116,7 +88,7 @@ public class RedDePetri {
     	else if ((transicion == 13 && habilitada(7)) || (transicion == 14 && habilitada(8)))
     		tiempo_t_habilitadas[transicion-12] = System.currentTimeMillis(); // se habilito T2 con el disparo de T0 o T1
     }
-    
+    // Este retorna el tiempo actual de las transiciones que se seteo en la funcion de arriba
 	public long getTiempoDeHabilitacion (int transicion) { //posicion del tiempo almacenado en el array (0, 1 y 2), correspondiente a las transiciones 2,7 u 8 respectivamente
     	
 		if (transicion == 2)

@@ -36,7 +36,7 @@ public class ControlOn extends Thread {
 					inv_t_log.logInvT(13, "on", 1,"");
 					setEstadoActivo("ACTIVE");
 										
-					disparar(7);
+				/*	disparar(7);
 					if (!getHabilitadaTemporal(7)) {
 							
 						hilos_procesador_tiempo[0] = System.currentTimeMillis();
@@ -47,7 +47,7 @@ public class ControlOn extends Thread {
 						Thread.sleep((svRate - tiempo) + i);
 						hilos_procesador_tiempo[0] = 0;
 						disparar(7);
-					}
+					} */
 					buffer.consumir();
 					inv_t_log.logInvT(7, "on", 1,"");
 					setEstadoActivo("IDLE");
@@ -68,7 +68,7 @@ public class ControlOn extends Thread {
 					inv_t_log.logInvT(14, "on", 2,"");
 					setEstadoActivo("ACTIVE");
 
-					disparar(8);
+				/*	disparar(8);
 					if (!getHabilitadaTemporal(8)) {
 						
 						hilos_procesador_tiempo[0] = System.currentTimeMillis();
@@ -79,7 +79,7 @@ public class ControlOn extends Thread {
 						Thread.sleep((svRate - tiempo) + i);
 						hilos_procesador_tiempo[0] = 0;
 						disparar (8);
-					}
+					} */
 					buffer.consumir();
 					inv_t_log.logInvT(8, "on", 2,"");
 					setEstadoActivo("IDLE");
@@ -121,10 +121,6 @@ public class ControlOn extends Thread {
 		return rdp.getTiempoDeHabilitacion(transicion);
 	}
 	
-	public boolean getHabilitadaTemporal (int transicion) {
-		return rdp.getHabilitadaTemporal(transicion);
-	}
-
 	public void disparar(int transicion) throws InterruptedException {
 		mon.disparo(transicion);
 	}

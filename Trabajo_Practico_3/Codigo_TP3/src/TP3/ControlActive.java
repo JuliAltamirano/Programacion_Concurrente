@@ -30,7 +30,7 @@ public class ControlActive extends Thread{
                     inv_t_log.logInvT(13, "active", 1,"");
                     control_on.setEstadoActivo("ACTIVE");
                     
-                    disparar(7);
+                /*    disparar(7);
 					if (!control_on.getHabilitadaTemporal(7)) {
 						
 						hilos_procesador_tiempo[1] = System.currentTimeMillis();
@@ -41,7 +41,7 @@ public class ControlActive extends Thread{
 						Thread.sleep((control_on.getSvRate() - tiempo) + i);
 						hilos_procesador_tiempo[1] = 0;
 						disparar (7);
-					}
+					} */
 					buffer.consumir();
                     inv_t_log.logInvT(7, "active", 1,"\n");
                     control_on.setEstadoActivo("IDLE");
@@ -56,7 +56,7 @@ public class ControlActive extends Thread{
 	                    inv_t_log.logInvT(14, "active", 2,"");
 	                    control_on.setEstadoActivo("ACTIVE");
 	                    
-	                    disparar(8);
+	                /*    disparar(8);
 						if (!control_on.getHabilitadaTemporal(8)) {
 							
 							hilos_procesador_tiempo[1] = System.currentTimeMillis();
@@ -67,7 +67,7 @@ public class ControlActive extends Thread{
 							Thread.sleep((control_on.getSvRate() - tiempo) + i);
 							hilos_procesador_tiempo[1] = 0;
 							disparar (8);
-						}
+						} */
 						buffer.consumir();
 	                    inv_t_log.logInvT(8, "active", 2,"\n");
 	                    control_on.setEstadoActivo("IDLE");
